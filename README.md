@@ -1,3 +1,18 @@
+# explorer-arduino
+Data Collection tool for https://github.com/edge-ml. Allows to incrementally upload sensor-data to the Explorer.
+
+## How to use
+
+### Install manually
+1. Download the latest version as a zip-file from Github releases
+2. In Arduino-IDE, go to Sketch, Include Library, Add .ZIP Library... and add the downloaded zip-file.
+3. Install the following required libraries using Arduino Library Manager: 
+    * ArduinoJson by Benoit Blanchon
+    * LinkedList by Ivan Seidel
+
+
+### Upload datasets in increments
+```c++
 #include <Arduino.h>
 
 // Contains everything you need
@@ -61,3 +76,4 @@ void loop()
 {
   // Don't need the loop in this example.
 }
+```
