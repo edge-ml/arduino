@@ -4,12 +4,11 @@
 #include "Arduino.h"
 #include "IncrementalRecorder.h"
 #include "HTTPClient.h"
-#include "Arduino_JSON.h"
 
 class Recorder {
   public:
     Recorder(String backendUrl, String deviceApiKey);
-    IncrementalRecorder* getIncrementalRecorder(String datasetName, bool useServerTime);
+    IncrementalRecorder* getIncrementalRecorder(String datasetName);
 
   private:
     unsigned long long getTime();
