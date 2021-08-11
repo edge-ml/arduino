@@ -25,6 +25,15 @@ IncrementalRecorder* Recorder::getIncrementalRecorder(String datasetName){
   deserializeJson(resObj, res);
   const char* datasetKey = (const char*) resObj["datasetKey"];
   IncrementalRecorder* incRec = new IncrementalRecorder(_backendUrl, _deviceApiKey, datasetName, datasetKey, calcTime);
+  http.~HTTPClient();
+  sendObj.~String();
+  reqAddr.~String();
+  res.~String();
+  
+  // Will lead to heap corruption error
+  //reqObj.~BasicJsonDocument();
+  //resObj.~BasicJsonDocument();
+  
   return incRec;
 }
 
@@ -37,4 +46,10 @@ unsigned long long Recorder::getTime() {
   }
   time(&now);
   return (unsigned long long) now * 1000;
+}
+
+Recorder::~Recorder() {
+    _backendUrl.~String();
+    _deviceApiKey.~String();
+    INITDATASETINCREMENT.~String();
 }

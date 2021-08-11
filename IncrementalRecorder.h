@@ -11,6 +11,7 @@ class IncrementalRecorder {
     IncrementalRecorder(String backendUrl, String projectKey, String datasetName, String datasetKey, unsigned long long calcTime);
     void addDataPoint(const char* sensorName, double dataPoint);
     void addDataPoint(unsigned long long dataPointTime, const char* sensorName, double dataPoint);
+    ~IncrementalRecorder();
     static void uploadData(void *req);
     void onComplete();
 
@@ -34,7 +35,7 @@ class IncrementalRecorder {
 static String ADDDATASETINCREMENT = "/api/deviceapi/addDatasetIncrementIot/";
 static String _backendUrl;
 static HTTPClient http;
-static String reqAddr;
+static int uploadCounter;
 static String _datasetKey;
 
 #endif

@@ -8,15 +8,13 @@ IncrementalRecorder::IncrementalRecorder(String backendUrl, String projectKey, S
   _datasetKey = datasetKey;
   _calcTime = calcTime;
   ctr = 0;
+  uploadCounter = 0;
   datapoints = new LinkedList<DATAPOINT>();
-  reqAddr = _backendUrl + ADDDATASETINCREMENT;
 }
 
 void IncrementalRecorder::uploadData(void *datapoints) {
-
   LinkedList<DATAPOINT> *tmpList = (LinkedList<DATAPOINT>*) datapoints;
-
-  http.begin(reqAddr.c_str());
+  http.begin((_backendUrl + ADDDATASETINCREMENT).c_str());
   http.addHeader("Content-Type", "application/json");
   String jsonString;
 
@@ -27,7 +25,12 @@ void IncrementalRecorder::uploadData(void *datapoints) {
   for (int i = 0; i < tmpList->size(); i++) {
     char strTime[16];
     sprintf(strTime, "%lld", tmpList->get(i).time);
-    String concatData = strTime + String(";") + String(tmpList->get(i).value) + ";" +  tmpList->get(i).sensorName;
+    String concatData;
+    concatData.concat(strTime);
+    concatData.concat(";");
+    concatData.concat(tmpList->get(i).value);
+    concatData.concat(";");
+    concatData.concat(tmpList->get(i).sensorName);
     arr.add(concatData);
     concatData.~String();
   }
@@ -43,7 +46,7 @@ void IncrementalRecorder::uploadData(void *datapoints) {
   doc.~BasicJsonDocument();
   tmpList->~LinkedList();
   jsonString.~String();
-
+  uploadCounter--;
   vTaskDelete( NULL );
 }
 
@@ -51,6 +54,7 @@ void IncrementalRecorder::addDataPoint(unsigned long long dataPointTime, const c
   datapoints->add(DATAPOINT{dataPoint, dataPointTime, sensorName});
   ctr++;
   if (ctr > 200) {
+    uploadCounter++;
     xTaskCreate(uploadData, "upload", 10000, datapoints, 2, NULL);
     datapoints = new LinkedList<DATAPOINT>();
     ctr = 0;
@@ -63,5 +67,18 @@ void IncrementalRecorder::addDataPoint(const char* sensorName, double dataPoint)
 }
 
 void IncrementalRecorder::onComplete() {
+  uploadCounter++;
+  Serial.print("UploadCounter onComplete: ");
   xTaskCreate(uploadData, "upload", 10000, datapoints, 2, NULL);
+  while(uploadCounter != 0) {
+    delay(10);
+  }
+  uploadCounter = 0;
+}
+
+IncrementalRecorder::~IncrementalRecorder() {
+  datapoints->~LinkedList();
+  _projectKey.~String();
+  _datasetKey.~String();
+  http.~HTTPClient();
 }

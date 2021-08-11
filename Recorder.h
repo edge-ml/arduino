@@ -9,12 +9,12 @@ class Recorder {
   public:
     Recorder(String backendUrl, String deviceApiKey);
     IncrementalRecorder* getIncrementalRecorder(String datasetName);
+    ~Recorder();
 
   private:
     unsigned long long getTime();
     String _backendUrl;
     String _deviceApiKey;
-    HTTPClient _httpClient;
     String INITDATASETINCREMENT = "/api/deviceapi/initDatasetIncrement/";
 };
 
