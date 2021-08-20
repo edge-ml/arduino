@@ -1,5 +1,5 @@
-#ifndef Recorder_h
-#define Recorder_h
+#ifndef EdgeML_h
+#define EdgeML_h
 
 #include "Arduino.h"
 #include "IncrementalRecorder.h"

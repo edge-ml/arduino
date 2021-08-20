@@ -68,7 +68,6 @@ void IncrementalRecorder::addDataPoint(const char* sensorName, double dataPoint)
 
 void IncrementalRecorder::onComplete() {
   uploadCounter++;
-  Serial.print("UploadCounter onComplete: ");
   xTaskCreate(uploadData, "upload", 10000, datapoints, 2, NULL);
   while(uploadCounter != 0) {
     delay(10);

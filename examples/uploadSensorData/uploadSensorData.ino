@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 // Contains everything you need
-#include <Recorder.h>
+#include <EdgeML.h>
 
 // WiFi credentials
 const char* ssid = "YOUR_SSID";

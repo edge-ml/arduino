@@ -1,4 +1,4 @@
-#include "Recorder.h"
+#include "EdgeML.h"
 
 Recorder::Recorder(String backendUrl, String deviceApiKey) {
   _backendUrl = backendUrl;
