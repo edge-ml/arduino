@@ -10,6 +10,9 @@ Data Collection tool for https://github.com/edge-ml. Allows to incrementally upl
     * ArduinoJson by Benoit Blanchon
     * LinkedList by Ivan Seidel
 
+### Install from Arduino Library Manager
+1. Search "EdgeML"
+2. Install the latests version
 
 ### Upload datasets in increments
 ```c++
