@@ -1,5 +1,5 @@
 # explorer-arduino
-Data Collection tool for https://github.com/edge-ml. Allows to incrementally upload sensor-data to the Explorer.
+Data Collection tool for https://github.com/edge-ml. Allows to incrementally upload sensor-data to edge-ml.
 
 ## How to use
 
