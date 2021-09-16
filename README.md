@@ -3,16 +3,16 @@ Data Collection tool for https://github.com/edge-ml. Allows to incrementally upl
 
 ## How to use
 
+### Install from Arduino Library Manager
+1. Search "EdgeML"
+2. Install the latests version
+
 ### Install manually
 1. Download the latest version as a zip-file from Github releases
 2. In Arduino-IDE, go to Sketch, Include Library, Add .ZIP Library... and add the downloaded zip-file.
 3. Install the following required libraries using Arduino Library Manager: 
     * ArduinoJson by Benoit Blanchon
     * LinkedList by Ivan Seidel
-
-### Install from Arduino Library Manager
-1. Search "EdgeML"
-2. Install the latests version
 
 ### Upload datasets in increments
 ```c++
