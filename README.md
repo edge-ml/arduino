@@ -14,7 +14,7 @@ Data Collection tool for https://github.com/edge-ml. Allows to incrementally upl
     * ArduinoJson by Benoit Blanchon
     * LinkedList by Ivan Seidel
 
-### Upload datasets in increments
+### Example: Upload datasets in increments
 ```c++
 #include <Arduino.h>
 
