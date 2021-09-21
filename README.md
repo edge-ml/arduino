@@ -48,7 +48,7 @@ void setup()
 
   // Generate a recorder. The values for BACKEND_URL 
   // and DEVICE_API_KEY can be obtained from the settings 
-  // page of the explorer.
+  // page of edge-ml project.
   Recorder *rec = new Recorder("BACKEND_URL", "DEVICE_API_KEY");
   
   // This generates a dataset with the name DATASET_NAME. 
